@@ -1,15 +1,15 @@
 # Finish PyTorch Upgrade
 
-You currently have PyTorch 2.5.1 installed. Complete the upgrade to PyTorch 2.6+ nightly:
+You currently have an older PyTorch version installed. Complete the upgrade to PyTorch 2.6+ stable:
 
 ## Easiest Way (Windows)
 
-**Just run the script again:**
+**Just run the script:**
 ```bash
 fix_pytorch.bat
 ```
 
-It will detect and remove PyTorch 2.5.1, then install PyTorch 2.6+ nightly.
+It will detect and remove your old PyTorch, then install PyTorch 2.9.1 stable with CUDA 12.6.
 
 ## Manual Commands (if needed)
 
@@ -20,11 +20,11 @@ venv\Scripts\activate
 
 **Run these commands:**
 ```bash
-# Step 1: Uninstall PyTorch 2.5.1
+# Step 1: Uninstall old PyTorch
 pip uninstall -y torch torchvision torchaudio
 
-# Step 2: Install PyTorch 2.6+ nightly
-pip install --pre torch torchvision torchaudio --index-url https://download.pytorch.org/whl/nightly/cu121
+# Step 2: Install PyTorch 2.9.1 stable with CUDA 12.6
+pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu126
 
 # Step 3: Verify
 python -c "import torch; print(f'PyTorch: {torch.__version__}'); print(f'CUDA: {torch.cuda.is_available()}')"
@@ -32,7 +32,7 @@ python -c "import torch; print(f'PyTorch: {torch.__version__}'); print(f'CUDA: {
 
 You should see:
 ```
-PyTorch: 2.6.0+git...
+PyTorch: 2.9.1+cu126
 CUDA: True
 ```
 
@@ -57,7 +57,7 @@ All 16 models should now work, including:
 
 You'll notice a pause after each model loads (5-30 seconds). **This is normal!**
 
-PyTorch 2.6+ compiles models for optimization on first use. This happens during the warmup phase, so your actual benchmark measurements are unaffected.
+PyTorch 2.5+ and later compile models for optimization on first use. This happens during the warmup phase, so your actual benchmark measurements are unaffected.
 
 Example:
 ```

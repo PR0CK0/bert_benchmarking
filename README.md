@@ -197,33 +197,36 @@ You should see `(venv)` in your terminal prompt when activated.
 
 ### 2. Install PyTorch 2.6+
 
-**Recommended: PyTorch 2.6+ nightly** (fixes CVE-2025-32434 and enables all 16 models)
-
-**Does not currently address the CVE issues, although it should**
+**Required: PyTorch 2.6+ stable** (fixes CVE-2025-32434 and enables all 16 models)
 
 **Windows Users - Just Run This:**
 ```bash
 fix_pytorch.bat
 ```
 
-The script automatically handles everything: uninstalls old PyTorch, upgrades NumPy, installs PyTorch 2.6+ nightly with CUDA 12.1, and verifies installation.
+The script automatically handles everything: uninstalls old PyTorch, upgrades NumPy, installs latest stable PyTorch (2.9.1+cu126), and verifies installation.
 
 **Linux/Mac Users:**
 ```bash
-# For CUDA 12.1+ (RTX 30xx/40xx series)
-pip install --pre torch torchvision torchaudio --index-url https://download.pytorch.org/whl/nightly/cu121
+# For CUDA 12.6 (RTX 40xx series, newest)
+pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu126
+
+# For CUDA 12.4 (RTX 30xx/40xx series)
+pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124
 
 # For CUDA 11.8 (older GPUs)
-pip install --pre torch torchvision torchaudio --index-url https://download.pytorch.org/whl/nightly/cu118
+pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
 
 # For CPU only
-pip install --pre torch torchvision torchaudio --index-url https://download.pytorch.org/whl/nightly/cpu
+pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
 ```
 
-**Why nightly builds?** PyTorch 2.6 isn't officially released yet. Nightly builds include:
+**Why PyTorch 2.6+?** Stable releases 2.6.0 and later include:
 - ✅ CVE-2025-32434 security fix
-- ✅ Support for all model formats (enables all 16 models)
+- ✅ Support for all model formats (enables all 16 models including pickle-based)
 - ✅ NumPy 1.x and 2.x compatibility
+
+**Important:** Dev/nightly builds from before the stable 2.6.0 release (like 2.6.0.dev20241112) will NOT work. You need stable 2.6.0 or later.
 
 **Need help?** See [UPGRADE_PYTORCH.md](UPGRADE_PYTORCH.md) for detailed information and troubleshooting.
 
@@ -298,7 +301,7 @@ This script checks all dependencies and diagnoses common issues. If all checks p
 python -c "import torch; print(f'PyTorch: {torch.__version__}'); print(f'CUDA: {torch.cuda.is_available()}'); print(f'GPU: {torch.cuda.get_device_name(0) if torch.cuda.is_available() else \"N/A\"}')"
 
 # Expected output with GPU:
-# PyTorch: 2.x.x+cu121
+# PyTorch: 2.9.1+cu126 (or similar)
 # CUDA: True
 # GPU: NVIDIA GeForce RTX 3080
 ```
@@ -523,7 +526,6 @@ models:
 - `distilroberta-base` - Distilled RoBERTa (82M params)
 
 **Tiny/Small models** (requires PyTorch 2.6+):
-- *NOTE*: not currently working, see See [UPGRADE_PYTORCH.md](UPGRADE_PYTORCH.md) for upgrade instructions.
 - `prajjwal1/bert-tiny` - Tiny BERT (4M params)
 - `prajjwal1/bert-mini` - Mini BERT (11M params)
 - `prajjwal1/bert-small` - Small BERT (29M params)
@@ -538,11 +540,10 @@ models:
 - `bert-base-uncased` - Original BERT (110M params)
 - `roberta-base` - RoBERTa (125M params)
 
-**Efficient architectures** (requires PyTorch 2.6+):
+**Efficient architectures**:
 - `albert-base-v2` - ALBERT with parameter sharing (12M params)
- 
+
 **Microsoft architectures** (requires PyTorch 2.6+):
-- *NOTE*: not currently working, see See [UPGRADE_PYTORCH.md](UPGRADE_PYTORCH.md) for upgrade instructions.
 - `microsoft/deberta-v3-small` - DeBERTaV3 small
 - `microsoft/deberta-v3-base` - DeBERTaV3 base (86M params)
 
@@ -733,7 +734,7 @@ bert_benchmarking/
 ├── generate_report.py           # Regenerate reports from saved results
 ├── setup_cache.py               # Interactive cache configuration
 ├── verify_setup.py              # Verify installation and diagnose issues
-├── fix_pytorch.bat              # Upgrade to PyTorch 2.6+ (Windows)
+├── fix_pytorch.bat              # Install PyTorch 2.9.1+cu126 (Windows)
 ├── requirements.txt
 ├── .env.example                 # Template for cache configuration
 ├── LICENSE                      # MIT License

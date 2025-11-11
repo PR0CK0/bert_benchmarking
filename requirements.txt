@@ -1,18 +1,23 @@
-# NOTE: Install PyTorch 2.6+ nightly separately based on your system
+# NOTE: Install PyTorch 2.6+ separately based on your system
 # PyTorch 2.6+ required to fix CVE-2025-32434 security vulnerability
 # This allows loading all 16 model formats including legacy pickle-based models
-# Since PyTorch 2.6 isn't officially released, use nightly builds (pre-release)
 #
-# For CUDA 12.1+ (RTX 30xx/40xx series):
-#   pip install --pre torch torchvision torchaudio --index-url https://download.pytorch.org/whl/nightly/cu121
+# WINDOWS: Just run fix_pytorch.bat
 #
-# For CUDA 11.8:
-#   pip install --pre torch torchvision torchaudio --index-url https://download.pytorch.org/whl/nightly/cu118
+# LINUX/MAC - Use the CUDA version that matches your system:
+# For CUDA 12.6 (RTX 40xx series, newest):
+#   pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu126
+#
+# For CUDA 12.4 (RTX 30xx/40xx series):
+#   pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124
+#
+# For CUDA 11.8 (older GPUs):
+#   pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
 #
 # For CPU only:
-#   pip install --pre torch torchvision torchaudio --index-url https://download.pytorch.org/whl/nightly/cpu
+#   pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
 #
-# torch>=2.6.0  # Commented out - install separately with --pre flag
+# torch>=2.6.0  # Commented out - install separately using commands above
 
 # Core dependencies
 numpy>=1.24.0  # PyTorch 2.6+ supports both numpy 1.x and 2.x

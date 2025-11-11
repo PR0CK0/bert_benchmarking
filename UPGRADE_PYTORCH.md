@@ -1,10 +1,10 @@
-# Upgrading to PyTorch 2.6+
+# Upgrading to PyTorch 2.6+ (Stable)
 
-This guide helps you upgrade to PyTorch 2.6+ to fix CVE-2025-32434 and enable all 16 models.
+This guide helps you upgrade to PyTorch 2.6+ stable release to fix CVE-2025-32434 and enable all 16 models.
 
 ## Why Upgrade?
 
-PyTorch 2.6+ fixes a critical security vulnerability (CVE-2025-32434) that affects loading models in pickle format. After upgrading, you'll be able to use:
+PyTorch 2.6.0 and later (stable releases) fix a critical security vulnerability (CVE-2025-32434) that affects loading models in pickle format. After upgrading, you'll be able to use:
 
 - All prajjwal1/bert-* models (tiny, mini, small)
 - All google/bert_uncased_* models
@@ -35,7 +35,7 @@ fix_pytorch.bat
 This script will:
 1. Uninstall your current PyTorch
 2. Upgrade NumPy
-3. Install PyTorch 2.6+ with CUDA 12.1
+3. Install PyTorch 2.9.1 stable with CUDA 12.6
 
 ### Option 2: Manual Installation
 
@@ -51,20 +51,23 @@ pip install --upgrade "numpy>=1.24.0"
 
 **Step 3: Install PyTorch 2.6+ with CUDA**
 
-Since PyTorch 2.6 isn't officially released yet, use the nightly (pre-release) build:
+PyTorch 2.6+ is now stable and officially released. Choose the CUDA version that matches your system:
 
 ```bash
-# For CUDA 12.1+ (RTX 30xx/40xx) - RECOMMENDED
-pip install --pre torch torchvision torchaudio --index-url https://download.pytorch.org/whl/nightly/cu121
+# For CUDA 12.6 (RTX 40xx series, newest) - RECOMMENDED
+pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu126
+
+# For CUDA 12.4 (RTX 30xx/40xx series)
+pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124
 
 # For CUDA 11.8 (older GPUs)
-pip install --pre torch torchvision torchaudio --index-url https://download.pytorch.org/whl/nightly/cu118
+pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
 
 # For CPU only
-pip install --pre torch torchvision torchaudio --index-url https://download.pytorch.org/whl/nightly/cpu
+pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
 ```
 
-**Note**: Nightly builds are pre-release versions but are generally stable. They include the latest security fixes.
+**Note**: These are stable releases, not nightly builds. Latest version is 2.9.1+.
 
 **Step 4: Verify installation**
 ```bash
@@ -73,7 +76,7 @@ python -c "import torch; print(f'PyTorch: {torch.__version__}'); print(f'CUDA: {
 
 You should see:
 ```
-PyTorch: 2.6.0+git...  (nightly version)
+PyTorch: 2.9.1+cu126  (or similar stable version)
 CUDA: True
 ```
 
@@ -131,9 +134,13 @@ source venv/bin/activate
 ```
 
 ### "CUDA available: False" after upgrade
-Your CUDA installation is fine - PyTorch is using CPU. Make sure you used the `--index-url` flag for CUDA:
+You installed the CPU-only version. Make sure you used the `--index-url` flag for CUDA:
 ```bash
-pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
+# For CUDA 12.6
+pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu126
+
+# For CUDA 12.4
+pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124
 ```
 
 ### NumPy compatibility errors
@@ -145,15 +152,17 @@ pip install --upgrade numpy
 PyTorch 2.6+ works with both NumPy 1.x and 2.x.
 
 ### Still getting CVE-2025-32434 errors
-Your PyTorch version is still old:
+Your PyTorch version is too old (or a dev build from before 2.6.0 stable):
 ```bash
 # Check version
 python -c "import torch; print(torch.__version__)"
 
-# If < 2.6.0, reinstall
+# If < 2.6.0 (or shows 2.6.0.dev from 2024), reinstall:
 pip uninstall -y torch torchvision torchaudio
-pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
+pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu126
 ```
+
+**Important**: Dev/nightly builds from before the stable 2.6.0 release (e.g., `2.6.0.dev20241112`) will NOT work. You need stable 2.6.0 or later.
 
 ## Rolling Back (if needed)
 
@@ -163,10 +172,10 @@ If you need to rollback for any reason:
 # Uninstall PyTorch 2.6+
 pip uninstall -y torch torchvision torchaudio
 
-# Reinstall PyTorch 2.1.x
-pip install torch==2.1.2 torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
+# Reinstall PyTorch 2.5.x (latest before 2.6)
+pip install torch==2.5.1 torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
 
-# Downgrade NumPy
+# Optionally downgrade NumPy if needed
 pip install "numpy<2.0"
 ```
 

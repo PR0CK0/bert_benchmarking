@@ -16,24 +16,30 @@ python3 -m venv venv
 source venv/bin/activate
 ```
 
-## 2. Install PyTorch 2.6+ (GPU Support)
+## 2. Install PyTorch 2.6+ Stable (GPU Support)
 
 **Windows - Just run:**
 ```bash
 fix_pytorch.bat
 ```
-Done! The script handles everything automatically.
+Done! The script handles everything automatically (installs PyTorch 2.9.1+cu126).
 
 **Linux/Mac:**
 ```bash
-# For NVIDIA GPU
-pip install --pre torch torchvision torchaudio --index-url https://download.pytorch.org/whl/nightly/cu121
+# For CUDA 12.6 (RTX 40xx, newest)
+pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu126
+
+# For CUDA 12.4 (RTX 30xx/40xx)
+pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124
+
+# For CUDA 11.8 (older GPUs)
+pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
 
 # For CPU only
-pip install --pre torch torchvision torchaudio --index-url https://download.pytorch.org/whl/nightly/cpu
+pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
 ```
 
-**Important**: PyTorch 2.6+ nightly is required to access all 16 models (fixes CVE-2025-32434).
+**Important**: PyTorch 2.6+ stable is required to access all 16 models (fixes CVE-2025-32434).
 
 ## 3. Install Other Dependencies
 

@@ -199,6 +199,8 @@ You should see `(venv)` in your terminal prompt when activated.
 
 **Recommended: PyTorch 2.6+ nightly** (fixes CVE-2025-32434 and enables all 16 models)
 
+**Does not currently address the CVE issues, although it should**
+
 **Windows Users - Just Run This:**
 ```bash
 fix_pytorch.bat
@@ -547,7 +549,7 @@ models:
 **Sentence embeddings:**
 - `sentence-transformers/all-MiniLM-L6-v2` - Fast semantic search (23M params)
 
-**Important**: 9 of these models require **PyTorch 2.6+** due to legacy pickle format. With older PyTorch versions, only 7 models will work. See [UPGRADE_PYTORCH.md](UPGRADE_PYTORCH.md) for upgrade instructions.
+**Important**: Some of these models require **PyTorch 2.6+** due to legacy pickle format. With older PyTorch versions, only 8 models are guaranteed to work. See [UPGRADE_PYTORCH.md](UPGRADE_PYTORCH.md) for upgrade instructions.
 
 ### Benchmark Configuration (`configs/benchmark_config.yaml`)
 

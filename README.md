@@ -55,7 +55,7 @@ This is a **performance and resource benchmark**, NOT an accuracy test. It measu
 
 ❌ **Model Accuracy** - Not measuring classification quality
 ❌ **Prediction Correctness** - Not evaluating output quality
-❌ **Real-world Performance** - Not testing on actual OCSF data
+❌ **Real-world Performance** - Not testing on actual cybersecurity data
 ❌ **Fine-tuning Quality** - Not measuring learning capability
 
 ### How It Works: Dummy Data Testing
@@ -779,7 +779,7 @@ print(best)
 
 1. **Add fine-tuning capability** - Extend `benchmarker.py` to support training
 2. **Track training metrics** - Add training time, convergence to metrics
-3. **Test on real data** - Replace dummy inputs with actual OCSF samples
+3. **Test on real data** - Replace dummy inputs with actual cybersecurity samples
 4. **Evaluate accuracy** - Add classification quality metrics
 
 ### For production deployment:

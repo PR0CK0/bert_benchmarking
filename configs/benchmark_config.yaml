@@ -1,0 +1,43 @@
+# Benchmark Configuration
+
+# Test settings
+benchmark:
+  # Number of warmup iterations (to stabilize GPU/CPU)
+  warmup_iterations: 10
+
+  # Number of measurement iterations
+  test_iterations: 100
+
+  # Batch sizes to test
+  batch_sizes: [1, 4, 8, 16, 32]
+
+  # Sequence lengths to test
+  sequence_lengths: [32, 64, 128, 256]
+
+  # Devices to test on
+  devices: ["cpu", "cuda"]  # Will auto-detect CUDA availability
+
+  # Number of classes for classification head
+  num_classes: 10  # Update this as your ontology grows
+
+# Memory profiling
+memory:
+  # Track peak memory usage
+  track_peak: true
+
+  # Track memory over time (more detailed but slower)
+  track_timeline: false
+
+# Results storage
+results:
+  # Output directory
+  output_dir: "results"
+
+  # Save format
+  formats: ["csv", "json"]
+
+  # Create comparison plots
+  create_plots: true
+
+  # Timestamp results
+  use_timestamp: true

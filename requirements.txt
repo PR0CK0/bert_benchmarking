@@ -1,0 +1,32 @@
+# NOTE: Install PyTorch 2.6+ nightly separately based on your system
+# PyTorch 2.6+ required to fix CVE-2025-32434 security vulnerability
+# This allows loading all 16 model formats including legacy pickle-based models
+# Since PyTorch 2.6 isn't officially released, use nightly builds (pre-release)
+#
+# For CUDA 12.1+ (RTX 30xx/40xx series):
+#   pip install --pre torch torchvision torchaudio --index-url https://download.pytorch.org/whl/nightly/cu121
+#
+# For CUDA 11.8:
+#   pip install --pre torch torchvision torchaudio --index-url https://download.pytorch.org/whl/nightly/cu118
+#
+# For CPU only:
+#   pip install --pre torch torchvision torchaudio --index-url https://download.pytorch.org/whl/nightly/cpu
+#
+# torch>=2.6.0  # Commented out - install separately with --pre flag
+
+# Core dependencies
+numpy>=1.24.0  # PyTorch 2.6+ supports both numpy 1.x and 2.x
+transformers>=4.30.0
+datasets>=2.14.0
+accelerate>=0.20.0
+psutil>=5.9.0
+nvidia-ml-py3>=7.352.0
+pyyaml>=6.0
+pandas>=2.0.0
+matplotlib>=3.7.0
+seaborn>=0.12.0
+tqdm>=4.65.0
+python-dotenv>=1.0.0
+protobuf>=3.20.0,<5.0.0  # Required for DeBERTa models
+tabulate>=0.9.0
+sentencepiece>=0.1.99  # Required for some models

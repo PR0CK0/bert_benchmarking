@@ -1,0 +1,73 @@
+# BERT Model Variants to Benchmark
+# Priority order: distilled -> domain-specific -> base -> efficient architectures
+
+models:
+  # Distilled models (fastest inference)
+  - name: "distilbert-base-uncased"
+    type: "sequence-classification"
+    description: "40% smaller, 60% faster than BERT-base"
+
+  - name: "distilroberta-base"
+    type: "sequence-classification"
+    description: "Distilled RoBERTa variant"
+
+  # Tiny models (extreme efficiency) - Requires PyTorch 2.6+
+  - name: "prajjwal1/bert-tiny"
+    type: "sequence-classification"
+    description: "Tiny BERT (2 layers, 128 hidden, 4M params)"
+
+  - name: "prajjwal1/bert-mini"
+    type: "sequence-classification"
+    description: "Mini BERT (4 layers, 256 hidden, 11M params)"
+
+  - name: "prajjwal1/bert-small"
+    type: "sequence-classification"
+    description: "Small BERT (4 layers, 512 hidden, 29M params)"
+
+  - name: "google/bert_uncased_L-2_H-128_A-2"
+    type: "sequence-classification"
+    description: "Ultra-tiny BERT (2 layers, 128 hidden)"
+
+  - name: "google/bert_uncased_L-4_H-256_A-4"
+    type: "sequence-classification"
+    description: "Small BERT (4 layers, 256 hidden)"
+
+  - name: "google/bert_uncased_L-6_H-512_A-8"
+    type: "sequence-classification"
+    description: "Medium BERT (6 layers, 512 hidden)"
+
+  # Domain-specific cybersecurity models
+  - name: "jackaduma/SecBERT"
+    type: "sequence-classification"
+    description: "Pre-trained on cybersecurity corpus"
+
+  # Base models (baseline comparison)
+  - name: "bert-base-uncased"
+    type: "sequence-classification"
+    description: "Original BERT-base (110M params)"
+
+  - name: "roberta-base"
+    type: "sequence-classification"
+    description: "RoBERTa base (125M params)"
+
+  # Efficient architectures
+  - name: "albert-base-v2"
+    type: "sequence-classification"
+    description: "ALBERT with parameter sharing (12M params)"
+
+  - name: "microsoft/deberta-v3-small"
+    type: "sequence-classification"
+    description: "DeBERTaV3 small (efficient disentangled attention)"
+
+  - name: "microsoft/deberta-v3-base"
+    type: "sequence-classification"
+    description: "DeBERTaV3 base (86M params, state-of-the-art)"
+
+  - name: "sentence-transformers/all-MiniLM-L6-v2"
+    type: "sentence-similarity"
+    description: "Optimized for semantic search (very fast)"
+
+# Optional: Add your own models here
+# - name: "custom-model-path"
+#   type: "sequence-classification"
+#   description: "Description"

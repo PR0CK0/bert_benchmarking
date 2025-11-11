@@ -637,6 +637,7 @@ results/
 - `top_performers_summary.png` - Combined 3-panel summary of top 3 in each category
 
 **Example output images:**
+![Model memory usage](examples/plots_memory.png)
 ![Model size vs. inference latency graph](examples/plots_size_vs_latency.png)
 ![Summary of top performing models visualization](examples/top_performers_summary.png)
 
